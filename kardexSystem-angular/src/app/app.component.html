@@ -1,0 +1,15 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<div class="container">
+  <div style="text-align:center">
+    <h1>
+      Welcome to {{ title }}!
+    </h1>
+  </div>
+  <div class="row align-items-center justify-content-center mt-5">
+    <button (click)="ListProducts()" class="btn btn-outline-info" style="padding: 10px; margin: 10px">List
+      products</button>
+    <button (click)="AddNew()" class="btn btn-outline-info" style="padding: 10px; margin: 10px">Add product</button>
+  </div>
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,34 @@
+<form #updateForm="ngForm">
+    <fieldset disabled>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Type of product</label>
+                <input type="text" class="form-control" placeholder="{{product.name}}">
+            </div>
+            <div class="col">
+                <label>Price</label>
+                <input type="text" class="form-control" placeholder="{{product.price}}">
+            </div>
+            <div class="col">
+                <label>Quantity</label>
+                <input type="text" class="form-control" placeholder="{{product.quantity}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea type="text" class="form-control" placeholder="{{product.description}}"></textarea>
+        </div>
+    </fieldset>
+    <div class="form-group row">
+        <label *ngIf="operation === 'true'" class="col-sm-4 col-form-label">How many units are going to be added
+            ?</label>
+        <label *ngIf="operation === 'false'" class="col-sm-4 col-form-label">How many units are going to be sold
+            ? *</label>
+        <div class="col">
+            <input type="number" min="0" required class="form-control col-sm-2" [(ngModel)]="newStock" name="newStock">
+        </div>
+    </div>
+    <div class="row align-items-center justify-content-center mt-4">
+        <button type="button" (click)="SaveEdit(updateForm)" class="btn btn-outline-info">Save stock</button>
+    </div>
+</form>

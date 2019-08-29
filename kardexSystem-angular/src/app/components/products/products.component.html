@@ -1,0 +1,20 @@
+<div class="col-md-auto mt-5">
+    <table class="table table-striped">
+        <tr class="bg-info">
+            <th>Type</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let product of products">
+            <td>{{product.name}}</td>
+            <td style="word-break: break-all; max-width: 150px;"><p>{{product.description}}</p></td>
+            <td>{{product.price}}</td>
+            <td>{{product.quantity}}</td>
+            <td><button (click)="AddSotck(product)" class="btn btn-outline-info">Add stock</button></td>
+            <td *ngIf="product.quantity > 0"><button (click)="SellStock(product)" class="btn btn-outline-info">Sell stock</button></td>
+        </tr>
+    </table>
+</div>
