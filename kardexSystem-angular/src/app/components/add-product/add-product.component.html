@@ -1,23 +1,34 @@
 <form #addForm="ngForm">
+    <div *ngIf="!addForm.valid" class="alert alert-danger" role="alert">
+        The fields with * are required.
+    </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label>Type of product*</label>
+            <label>Type of product<a style="color: red">*</a></label>
             <select [(ngModel)]="product.name" name="name" class="form-control">
                 <option selected>Camisa</option>
                 <option>Vaso</option>
                 <option>Comic</option>
                 <option>Juguete</option>
                 <option>Accesorio</option>
+                <option>Comunidad</option>
             </select>
         </div>
         <div class="col">
-            <label>Price*</label>
-            <input type="number" min="0" [(ngModel)]="product.price" name="price" class="form-control" placeholder="Price" required>
+            <label>Price<a style="color: red">*</a></label>
+            <input type="number" min="0" [(ngModel)]="product.price" name="price" class="form-control"
+                placeholder="Price" required #price="ngModel">
+            <div *ngIf="price.errors?.required">
+                This field is required.
+            </div>
         </div>
         <div class="col">
-            <label>Quantity<span>*</span></label>
-            <input type="number" min="0" [(ngModel)]="product.quantity" name="quantity" class="form-control" placeholder="Quantity"
-                required>
+            <label>Quantity<a style="color: red">*</a></label>
+            <input type="number" min="0" [(ngModel)]="product.quantity" name="quantity" class="form-control"
+                placeholder="Quantity" required #quantity="ngModel">
+            <div *ngIf="quantity.errors?.required">
+                This field is required.
+            </div>
         </div>
     </div>
     <div class="form-group">
@@ -26,6 +37,7 @@
             placeholder="Description"></textarea>
     </div>
     <div class="row align-items-center justify-content-center mt-5">
-        <button class="btn btn-outline-info" (click)="SaveProduct(product,addForm)">Save product</button>
+        <button *ngIf="addForm.valid" class="btn btn-outline-info" (click)="SaveProduct(product,addForm)">Save product</button>
+        <button *ngIf="!addForm.valid" class="btn btn-secondary" (click)="SaveProduct(product,addForm)" disabled>Save product</button>
     </div>
 </form>

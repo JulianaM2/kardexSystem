@@ -31,29 +31,13 @@ export class UpdateProductComponent implements OnInit {
     if (updateForm.valid) {
       if (this.operation === 'true') {
         this.product.quantity = this.product.quantity + +this.newStock;
-
-        this.productService.updateStock(this.product).subscribe(data => {
-          alert('Success');
-        });
-        this.router.navigate(['list']);
-
       } else {
-        if (this.newStock <= this.product.quantity) {
-          this.product.quantity = this.product.quantity + -this.newStock;
-
-          this.productService.updateStock(this.product).subscribe(data => {
-            alert('Success');
-          });
-          this.router.navigate(['list']);
-        } else {
-          alert('There are not enough stock to sell');
-        }
-
+        this.product.quantity = this.product.quantity + -this.newStock;
       }
-    } else {
-      alert('There field with * is mandatory');
+      this.productService.updateStock(this.product).subscribe(data => {
+        alert('Success');
+      });
+      this.router.navigate(['list']);
     }
-
   }
-
 }

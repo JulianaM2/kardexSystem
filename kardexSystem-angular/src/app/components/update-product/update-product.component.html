@@ -1,4 +1,10 @@
 <form #updateForm="ngForm">
+    <div *ngIf="!updateForm.valid " class="alert alert-danger" role="alert">
+        The fields with * are required.
+    </div>
+    <div *ngIf="newStock > product.quantity && operation === 'false'" class="alert alert-danger" role="alert">
+        There are not enough units to sell.
+    </div>
     <fieldset disabled>
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -20,15 +26,20 @@
         </div>
     </fieldset>
     <div class="form-group row">
-        <label *ngIf="operation === 'true'" class="col-sm-4 col-form-label">How many units are going to be added
-            ?</label>
-        <label *ngIf="operation === 'false'" class="col-sm-4 col-form-label">How many units are going to be sold
-            ? *</label>
+        <label *ngIf="operation === 'true'" class="col-sm-5 col-form-label">How many units are going to be added
+            ?<a style="color: red">*</a></label>
+        <label *ngIf="operation === 'false'" class="col-sm-5 col-form-label">How many units are going to be sold
+            ?<a style="color: red">*</a></label>
         <div class="col">
-            <input type="number" min="0" required class="form-control col-sm-2" [(ngModel)]="newStock" name="newStock">
+            <input type="number" min="0" required class="form-control col-sm-2" [(ngModel)]="newStock" name="newStock"
+                #new="ngModel">
+            <div *ngIf="new.errors?.required">
+                This field is required.
+            </div>
         </div>
     </div>
     <div class="row align-items-center justify-content-center mt-4">
-        <button type="button" (click)="SaveEdit(updateForm)" class="btn btn-outline-info">Save stock</button>
+        <button *ngIf="updateForm.valid  && (product.quantity >= newStock || operation === 'true')" type="button" (click)="SaveEdit(updateForm)" class="btn btn-outline-info">Save stock</button>
+        <button *ngIf="!updateForm.valid  || (newStock > product.quantity && operation === 'false')" type="button" (click)="SaveEdit(updateForm)" class="btn btn-secondary" disabled>Save stock</button>
     </div>
 </form>

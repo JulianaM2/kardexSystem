@@ -6,7 +6,12 @@ import { Product } from 'src/app/model/product';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.css']
+  styleUrls: ['./add-product.component.css'],
+  styles: [`
+    .ng-invalid. ng-touched{
+      border 2px solid red;
+    }
+  `]
 })
 export class AddProductComponent implements OnInit {
 
@@ -15,6 +20,7 @@ export class AddProductComponent implements OnInit {
   constructor(private router: Router, private productService: ProductService) { }
 
   ngOnInit() {
+    this.product.name = 'Camisa';
   }
 
   SaveProduct(product: Product, addForm: any) {
@@ -24,8 +30,6 @@ export class AddProductComponent implements OnInit {
         alert('Success');
         this.router.navigate(['list']);
       });
-    } else {
-      alert('The field with * are mandatory');
     }
 
   }
