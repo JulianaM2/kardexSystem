@@ -24,17 +24,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(int id) {
-        return repo.findById(id).get();
+        return repo.findById(id).orElse(null);
     }
 
     @Override
-    public void addNewProduct(Product product) {
-        repo.save(product);
+    public Product addNewProduct(Product product) {
+        return repo.save(product);        
     }
 
 	@Override
-	public void updateProduct(Product product) {
-        repo.save(product);
+	public Product updateProduct(Product product) {
+        return repo.save(product);
 	}
     
 }

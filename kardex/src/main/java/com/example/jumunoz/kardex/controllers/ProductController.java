@@ -30,8 +30,9 @@ public class ProductController {
     }
 
     @PostMapping(value = "/add")
-    public void addNewProduct(@RequestBody Product product) {
-        productService.addNewProduct(product);
+    public Product addNewProduct(@RequestBody Product product) {
+        return productService.addNewProduct(product);
+
     }
 
     @GetMapping("/{id}")
@@ -40,9 +41,9 @@ public class ProductController {
     }
 
     @PutMapping("/update/{id}")
-    public void updateProduct(@RequestBody Product product, @PathVariable("id") int id) {
+    public Product  updateProduct(@RequestBody Product product, @PathVariable("id") int id) {
         product.setId(id);
-        productService.updateProduct(product);
+        return productService.updateProduct(product);
     }
 
 }
