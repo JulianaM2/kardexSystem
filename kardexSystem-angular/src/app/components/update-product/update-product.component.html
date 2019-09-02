@@ -39,7 +39,10 @@
         </div>
     </div>
     <div class="row align-items-center justify-content-center mt-4">
-        <button *ngIf="updateForm.valid  && (product.quantity >= newStock || operation === 'true')" type="button" (click)="SaveEdit(updateForm)" class="btn btn-outline-info">Save stock</button>
-        <button *ngIf="!updateForm.valid  || (newStock > product.quantity && operation === 'false')" type="button" (click)="SaveEdit(updateForm)" class="btn btn-secondary" disabled>Save stock</button>
+        <button *ngIf="updateForm.valid  && (product.quantity >= newStock || operation === 'true')" type="button"
+            (click)="SaveEdit(updateForm)" class="btn btn-outline-info">Save stock</button>
+        <button *ngIf="!updateForm.valid  || (newStock > product.quantity && operation === 'false')" type="button"
+            (click)="SaveEdit(updateForm)" class="btn btn-secondary" disabled>Save stock</button>
+        <button class="btn btn-outline-info" style="margin-left: 20px" (click)="Cancel()">Cancel</button>
     </div>
 </form>

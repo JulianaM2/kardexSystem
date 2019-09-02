@@ -37,7 +37,10 @@
             placeholder="Description"></textarea>
     </div>
     <div class="row align-items-center justify-content-center mt-5">
-        <button *ngIf="addForm.valid" class="btn btn-outline-info" (click)="SaveProduct(product,addForm)">Save product</button>
-        <button *ngIf="!addForm.valid" class="btn btn-secondary" (click)="SaveProduct(product,addForm)" disabled>Save product</button>
+        <button *ngIf="addForm.valid" class="btn btn-outline-info" (click)="SaveProduct(product,addForm)">Save
+            product</button>
+        <button *ngIf="!addForm.valid" class="btn btn-secondary" (click)="SaveProduct(product,addForm)" disabled>Save
+            product</button>
+        <button class="btn btn-outline-info" style="margin-left: 20px" (click)="Cancel()">Cancel</button>
     </div>
 </form>

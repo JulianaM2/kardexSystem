@@ -31,7 +31,7 @@ public class ProductServiceTests {
         List<Product> result = service.getAllProducts();
 
         Assertions.assertThat(result).hasSize(2);
-        Assertions.assertThat(result.get(0).getId()).isEqualTo(1);
+        Assertions.assertThat(result.get(0).getId()).isEqualTo(1);       
         Assertions.assertThat(result.get(1).getId()).isEqualTo(2);
     }
 
@@ -41,7 +41,6 @@ public class ProductServiceTests {
         List<Product> result = service.getAllProducts();
 
         Assertions.assertThat(result).isEmpty();
-
     }
 
     @Test
