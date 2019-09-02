@@ -6,12 +6,12 @@
         <div class="form-group col-md-6">
             <label>Type of product<a style="color: red">*</a></label>
             <select [(ngModel)]="product.name" name="name" class="form-control">
-                <option selected>Camisa</option>
-                <option>Vaso</option>
+                <option selected>T-Shirt</option>
+                <option>Cup</option>
                 <option>Comic</option>
-                <option>Juguete</option>
-                <option>Accesorio</option>
-                <option>Comunidad</option>
+                <option>Toy</option>
+                <option>Accessory</option>
+                <option>Community</option>
             </select>
         </div>
         <div class="col">
@@ -23,9 +23,9 @@
             </div>
         </div>
         <div class="col">
-            <label>Quantity<a style="color: red">*</a></label>
+            <label>Stock<a style="color: red">*</a></label>
             <input type="number" min="0" [(ngModel)]="product.quantity" name="quantity" class="form-control"
-                placeholder="Quantity" required #quantity="ngModel">
+                placeholder="Stock" required #quantity="ngModel">
             <div *ngIf="quantity.errors?.required">
                 This field is required.
             </div>

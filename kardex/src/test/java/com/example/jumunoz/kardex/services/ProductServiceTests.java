@@ -1,13 +1,11 @@
 package com.example.jumunoz.kardex.services;
 
-import static org.junit.Assert.assertThat;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import com.example.jumunoz.kardex.model.Product;
 import com.example.jumunoz.kardex.repositories.ProductRepository;
+import com.example.jumunoz.kardex.utils.CommonObjects;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -29,11 +27,12 @@ public class ProductServiceTests {
     @Test
     public void getAllProductsShouldReturnListWhenThereAreProducts() {
 
-        Mockito.when(productRepository.findAll()).thenReturn(products());
+        Mockito.when(productRepository.findAll()).thenReturn(CommonObjects.products());
         List<Product> result = service.getAllProducts();
 
         Assertions.assertThat(result).hasSize(2);
         Assertions.assertThat(result.get(0).getId()).isEqualTo(1);
+        Assertions.assertThat(result.get(1).getId()).isEqualTo(2);
     }
 
     @Test
@@ -42,19 +41,24 @@ public class ProductServiceTests {
         List<Product> result = service.getAllProducts();
 
         Assertions.assertThat(result).isEmpty();
-       
+
     }
 
     @Test
     public void getProductByIdShouldReturnTheProductWhenTheProductExists() {
         int productId = 1;
-        Mockito.when(productRepository.findById(productId)).thenReturn(Optional.of(products().get(0)));
+        Product product = CommonObjects.products().get(0);
+
+        Mockito.when(productRepository.findById(productId)).thenReturn(Optional.of(product));
 
         Product result = service.getProductById(productId);
 
         Assertions.assertThat(result).isNotNull();
         Assertions.assertThat(result.getId()).isEqualTo(productId);
-               
+        Assertions.assertThat(result.getName()).isEqualTo(product.getName());
+        Assertions.assertThat(result.getPrice()).isEqualTo(product.getPrice());
+        Assertions.assertThat(result.getQuantity()).isEqualTo(product.getQuantity());
+
     }
 
     @Test
@@ -65,38 +69,45 @@ public class ProductServiceTests {
         Product result = service.getProductById(productId);
 
         Assertions.assertThat(result).isNull();
-               
+
     }
 
-    
+    @Test
+    public void addNewProductShouldReturnTheProductWhenTheSaveIsSuccess() {
 
-    private List<Product> products() {
-        List<Product> products =  new ArrayList<>();
-        Product p1 = new Product();
-        p1.setName("name1");
-        p1.setPrice(1);
-        p1.setQuantity(1);
+        Product product = CommonObjects.product();
 
-        Product p2 = new Product();
-        p2.setId(2);
-        p2.setName("name2");
-        p2.setPrice(1);
-        p2.setQuantity(1);
+        Mockito.when(productRepository.save(product)).thenReturn(CommonObjects.products().get(0));
 
-        products.add(p1);
-        products.add(p2);
-        return products;
+        Product result = service.addNewProduct(product);
+
+        Assertions.assertThat(result).isNotNull();
+        Assertions.assertThat(result.getId()).isNotNull();
+        Assertions.assertThat(result.getId()).isEqualTo(product.getId());
+        Assertions.assertThat(result.getName()).isEqualTo(product.getName());
+        Assertions.assertThat(result.getPrice()).isEqualTo(product.getPrice());
+        Assertions.assertThat(result.getQuantity()).isEqualTo(product.getQuantity());
+
     }
 
-    private Product product() {
-        
-        Product p1 = new Product();
-        p1.setId(1);
-        p1.setName("name1");
-        p1.setPrice(1);
-        p1.setQuantity(1);
+    @Test
+    public void updateProductShouldReturnTheProductWhenTheSaveIsSuccess() {
 
-        return p1;
+        Product product = CommonObjects.product();
+        product.setName("name1 updated");
+        product.setPrice(100);
+        Product productUpdated = CommonObjects.productUpdated();
+
+        Mockito.when(productRepository.save(product)).thenReturn(CommonObjects.productUpdated());
+
+        Product result = service.updateProduct(product);
+
+        Assertions.assertThat(result).isNotNull();
+        Assertions.assertThat(result.getId()).isNotNull();
+        Assertions.assertThat(result.getId()).isEqualTo(productUpdated.getId());
+        Assertions.assertThat(result.getName()).isEqualTo(productUpdated.getName());
+        Assertions.assertThat(result.getPrice()).isEqualTo(productUpdated.getPrice());
+        Assertions.assertThat(result.getQuantity()).isEqualTo(productUpdated.getQuantity());
 
     }
 }

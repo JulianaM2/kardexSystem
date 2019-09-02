@@ -20,7 +20,7 @@ export class AddProductComponent implements OnInit {
   constructor(private router: Router, private productService: ProductService) { }
 
   ngOnInit() {
-    this.product.name = 'Camisa';
+    this.product.name = 'T-Shirt';
   }
 
   SaveProduct(product: Product, addForm: any) {
